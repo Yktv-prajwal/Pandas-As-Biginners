@@ -1,30 +1,56 @@
+# Pandas Series - Lecture Notes
 
-# PANDAS SERIES NOTES
+## Introduction
+**Pandas** is a powerful Python library used for data analysis and data manipulation.
 
+```python
+import pandas as pd
+```
 
-# 1. Import Pandas
+Check the installed version:
+
+```python
+print(pd.__version__)
+```
+
+---
+
+# 1. Pandas Series
+
+A **Series** is a one-dimensional labeled array capable of holding data of any type.
+
+## Creating a Series from a List
+
+```python
 import pandas as pd
 
-# Pandas is a Python library used for data analysis and manipulation.
-
-# Check Version
-print(pd.__version__)
-
-# ---------------------------
-# 2. Create a Series from List
-# ---------------------------
 data = ["java", "c++", "ruby", "go", "jsp", "julia", "Python"]
 
 s = pd.Series(data)
 
-# Series is a one-dimensional labeled array.
-# Default index starts from 0.
-
 print(s)
+```
 
-# ---------------------------
-# 3. Create Custom Index
-# ---------------------------
+### Output
+
+```
+0      java
+1       c++
+2      ruby
+3        go
+4       jsp
+5     julia
+6    Python
+dtype: object
+```
+
+---
+
+# 2. Custom Index
+
+We can assign our own index labels.
+
+```python
 data = ["Java", "C++", "Python", "Ruby", "Go", "jsp", "julia"]
 
 indexx = ["a", "b", "c", "d", "e", "f", "g"]
@@ -32,118 +58,224 @@ indexx = ["a", "b", "c", "d", "e", "f", "g"]
 s = pd.Series(data, index=indexx)
 
 print(s)
+```
 
-# Custom index replaces default numeric index.
+### Output
 
-# ---------------------------
-# 4. Create Series from Dictionary
-# ---------------------------
+```
+a      Java
+b       C++
+c    Python
+d      Ruby
+e        Go
+f       jsp
+g     julia
+dtype: object
+```
+
+---
+
+# 3. Series from Dictionary
+
+Dictionary keys become indexes and values become Series values.
+
+```python
 data = {
-    "a":100,
-    "b":300,
-    "c":400,
-    "d":450
+    "a": 100,
+    "b": 300,
+    "c": 400,
+    "d": 450
 }
 
 s = pd.Series(data)
 
 print(s)
+```
 
-# Dictionary keys become index.
-# Dictionary values become Series values.
+### Output
 
-# ---------------------------
-# 5. Access Elements
-# ---------------------------
+```
+a    100
+b    300
+c    400
+d    450
+dtype: int64
+```
 
-# By Position
+---
+
+# 4. Accessing Data
+
+## By Position
+
+```python
 print(s[0])
+```
 
-# By Custom Index
+## By Label
+
+```python
 print(s["c"])
+```
 
-# Slice
+## Slicing
+
+```python
 print(s[:3])
+```
 
-# ---------------------------
-# 6. Update Index
-# ---------------------------
-data = ["java","c++","ruby","go"]
+---
 
-indexx = ["a","b","c","d"]
+# 5. Series from NumPy Array
 
-s = pd.Series(data,index=indexx)
-
-print(s)
-
-# ---------------------------
-# 7. Series from NumPy Array
-# ---------------------------
+```python
 import numpy as np
 
-data = np.array([11,12,13,14,15])
+data = np.array([11, 12, 13, 14, 15])
 
 s = pd.Series(data)
 
 print(s)
+```
 
-# NumPy array can be converted into Pandas Series.
+### Output
 
-# ---------------------------
-# 8. Arithmetic Operations
-# ---------------------------
+```
+0    11
+1    12
+2    13
+3    14
+4    15
+dtype: int64
+```
 
+---
+
+# 6. Arithmetic Operations
+
+## Multiplication
+
+```python
 print(s * 2)
+```
 
-# Multiply each element by 2.
+### Output
 
+```
+22
+24
+26
+28
+30
+```
+
+## Addition
+
+```python
 print(s + 50)
+```
 
-# Add 50 to every element.
+### Output
 
-# Pandas performs element-wise operations.
+```
+61
+62
+63
+64
+65
+```
 
-# ---------------------------
-# 9. Conditional Filtering
-# ---------------------------
+---
 
+# 7. Conditional Filtering
+
+```python
 print(s[s > 14])
+```
 
-# Returns elements satisfying condition.
+### Output
 
-# ---------------------------
+```
+4    15
+dtype: int64
+```
+
+---
+
 # Important Pandas Functions
-# ---------------------------
 
-# pd.Series()      -> Create Series
-# pd.__version__   -> Check version
-# s[0]             -> Access by position
-# s["a"]           -> Access by label
-# s[:3]            -> Slicing
-# s*2              -> Multiplication
-# s+50             -> Addition
-# s[s>14]          -> Filtering
+| Function | Description |
+|----------|------------|
+| `pd.Series()` | Create a Series |
+| `pd.__version__` | Check Pandas version |
+| `s[0]` | Access by position |
+| `s["a"]` | Access by label |
+| `s[:3]` | Slice Series |
+| `s * 2` | Multiply elements |
+| `s + 50` | Add value to elements |
+| `s[s > 14]` | Filter data |
 
-# ---------------------------
-# Viva Points
-# ---------------------------
+---
 
-# 1. Pandas is used for data analysis.
-# 2. Series is a one-dimensional labeled array.
-# 3. Default indexing starts from 0.
-# 4. Custom indexing can be provided.
-# 5. Dictionary keys become Series indexes.
-# 6. NumPy arrays can be converted into Series.
-# 7. Series supports arithmetic operations.
-# 8. Series supports conditional filtering.
-# 9. Slicing works like Python lists.
-# 10. Pandas automatically aligns data based on index.
+# Data Types
 
-# ===========================
-# Output Types
-# ===========================
+| Type | Meaning |
+|------|----------|
+| object | String Data |
+| int64 | Integer Data |
+| float64 | Decimal Data |
+| bool | Boolean Data |
 
-# object -> String data
-# int64  -> Integer data
-# float64 -> Decimal data
-# bool   -> Boolean values
+---
+
+# Viva Questions
+
+### What is Pandas?
+Pandas is a Python library used for data analysis and manipulation.
+
+### What is a Series?
+A Series is a one-dimensional labeled array.
+
+### What is the default index in a Series?
+The default index starts from 0.
+
+### Can we use custom indexes?
+Yes, custom indexes can be assigned.
+
+### Can a dictionary be converted into a Series?
+Yes, dictionary keys become indexes and values become Series values.
+
+### Can a NumPy array be converted into a Series?
+Yes, using `pd.Series()`.
+
+### Does Series support arithmetic operations?
+Yes, element-wise arithmetic operations are supported.
+
+### What is conditional filtering?
+Selecting values based on a condition.
+
+Example:
+
+```python
+s[s > 14]
+```
+
+---
+
+# Key Points
+
+- Pandas is used for data analysis.
+- Series is one-dimensional.
+- Default indexing starts from 0.
+- Custom indexing is possible.
+- Dictionaries can create Series.
+- NumPy arrays can create Series.
+- Arithmetic operations are element-wise.
+- Conditional filtering is supported.
+- Series can store different data types.
+- Pandas automatically manages indexes.
+
+---
+
+## Author
+**Prajwal Kumbhar**
